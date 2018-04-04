@@ -1,0 +1,27 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+{% include 'flash.html' %}
+<div class="row">
+        <div class="col-md-8 col-md-offset-4">
+            <h3>All Users and Total Hours for Semester 2</h3>  <br />
+            
+            {% for user in userdict %}
+
+            {% if g.user.role == 1 %}&nbsp;<a href="{{url_for('edituser',id=userdict[user][0].id)}}"><b><span class="glyphicon glyphicon-edit"></span></b></a> <a href="{{url_for('deleteuser',id=userdict[user][0].id)}}" onclick="javascript:return deleteItem();"><b><span class="glyphicon glyphicon-remove"></span></b></a>
+                {% endif %} 
+ 
+
+                {{userdict[user][0].firstname}}  {{userdict[user][0].lastname}} (<b>{{userdict[user][0].userInitial}}</b>)
+: [
+                Tutorial Hours: {{userdict[user][1]}} | Marking Hours:
+                {{userdict[user][2]}} | Lecture Hours: {{userdict[user][3]}} |
+                Lab Hours: {{userdict[user][4]}} ] = <b>{{userdict[user][1]+userdict[user][2]+userdict[user][3]+userdict[user][4]}}</b>  
+             
+                               
+                <br /> <br />
+            {% endfor %}
+      </div>
+    </div>
+
+{% endblock %}
